@@ -1,0 +1,29 @@
+# Control de versiones
+.git
+.gitignore
+
+
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+
+.env
+*.env
+
+
+evidencias/
+README.md
+*.md
+
+
+.vscode/
+.idea/
+.DS_Store
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose*.yml

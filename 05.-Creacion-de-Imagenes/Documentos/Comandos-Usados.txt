@@ -1,0 +1,29 @@
+aplicación to-do-list-v1
+
+Construcción de la imagen
+docker build -t to-do-list-v1:1.0 .
+
+Creamos del contenedor
+A partir de la imagen creada ejecutamos el contenedor
+docker container run -d \
+> -p 5000:5000 \
+> --name CONTENEDOR-TO-DO-LIST-v1 \
+> to-do-list-v1:1.0
+
+
+aplicación to-do-list-v2
+
+Construcción de la imagen
+docker build -t to-do-list-v2:1.0 .
+
+Creamos del contenedor
+A partir de la imagen creada ejecutamos el contenedor
+docker container run -d \
+> -p 3000:3000 \
+> --name CONTENEDOR-TARJETA-NOTAS-V2 \
+> tarjeta-notas-v2:1.0
+
+validación de los contenedores creados 
+
+docker container ps
+
