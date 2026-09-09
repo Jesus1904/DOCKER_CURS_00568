@@ -1,0 +1,63 @@
+Creación de contenedor MariaDB: jammy
+
+docker container run -d \
+> -p 3306:3306 \
+> --name MARIADB-V1 \
+> -e MARIADB_USER=jezuz \
+> -e MARIADB_PASSWORD=qwerty123 \
+> -e MARIADB_ROOT_PASSWORD=123 \
+> mariadb: jammy
+
+
+Creación de contenedor Postgres:16
+
+docker container run -d \
+> -p 5432:5432 \
+> --name POSTGRESDB-V1 \
+> -e POSTGRES_USER=jezuz \
+> -e POSTGRES_PASSWORD=qwerty123 \
+> postgres:16
+
+Creación de contenedor Redis:7
+
+docker container run -d \
+> -p 6379:6379 \
+> --name REDISDB-V1 \
+> redis:7
+
+Detener un contenedor
+
+docker container stop POSTGRESDB-V1
+POSTGRESDB-V1
+
+Iniciar un contenedor detenido:
+
+docker container start POSTGRESDB-V1
+POSTGRESDB-V1
+
+Eliminación forzada
+
+docker rm -f REDISDB-V1
+REDISDB-V1
+
+Eliminación estándar
+
+docker container rm POSTGRESDB-V1
+POSTGRESDB-V1
+
+Revisar logs de un contenedor
+
+docker container logs MARIADB-V2
+
+
+Renombrar un contenedor (MARIADB-V1 → MARIADB-V2)
+
+MARIADB-V1  a MARIADB-V2
+docker container rename MARIADB-V1 MARIADB-V2
+
+Inspeccionar un Contenedor
+
+docker container inspect MARIADB-V2
+
+
+
