@@ -1,0 +1,44 @@
+# Creacion de redes
+docker network create RED-MOSQUITTO
+docker network create RED-KAFKA
+docker network create RED-GRAFANA
+
+docker network ls
+
+# Creacion de contenedores usando las redes desde su creacion
+docker container run -d \
+-p 1883:1883 \
+--name DOCKER-CONTAINER-MOSQUITTO \
+--network RED-MOSQUITTO \
+eclipse-mosquitto:2.0.18
+
+docker container run -d \
+-p 9092:9092 \
+--name DOCKER-CONTAINER-KAFKA \
+--network RED-KAFKA \
+apache/kafka:3.8.0
+
+docker container run -d \
+-p 3000:3000 \
+--name DOCKER-CONTAINER-GRAFANA \
+--network RED-GRAFANA \
+grafana/grafana:11.3.0
+
+# Inspeccion de redes
+docker network inspect RED-GRAFANA
+docker network inspect RED-MOSQUITTO
+docker network inspect RED-KAFKA
+
+# Conectar un contenedor YA CREADO a otra red (requisito que faltaba)
+docker network connect RED-KAFKA DOCKER-CONTAINER-GRAFANA
+
+# Desconectar contenedores de sus redes
+docker network disconnect RED-GRAFANA DOCKER-CONTAINER-GRAFANA
+docker network disconnect RED-KAFKA DOCKER-CONTAINER-GRAFANA
+docker network disconnect RED-MOSQUITTO DOCKER-CONTAINER-MOSQUITTO
+docker network disconnect RED-KAFKA DOCKER-CONTAINER-KAFKA
+
+# Eliminacion de redes
+docker network rm RED-GRAFANA
+docker network rm RED-MOSQUITTO
+docker network rm RED-KAFKA
