@@ -1,0 +1,38 @@
+Creamos la red
+
+docker network create examen_curs_00568
+
+Creamos los contenedor usando la red examen_curs_00568
+
+docker container run -d \
+-p 3000:3000 \
+--name DOCKER-CONTAINER-V1 \
+--network examen_curs_00568 \
+grafana/grafana:11.3.0
+
+docker container run -d \
+-p 9092:9092 \
+--name DOCKER-CONTAINER-KAFKA \
+--network examen_curs_00568 \
+apache/kafka:3.8.0
+
+docker container run -d \
+-p 1883:1883 \
+--name DOCKER-CONTAINER-MOSQUITTO \
+--network examen_curs_00568 \
+eclipse-mosquitto:2.0.18
+
+Inspeccionamos la red examen_curs_00568
+
+docker network inspect examen_curs_00568
+
+Verificamos que ips están usando  los contenedores , para esto hemos creado una alias en Docker(Comando completo en Docker Sheet)
+
+docker-net-containers examen_curs_00568
+
+
+Realizamos las pruebas de conexión entre contenedores
+
+docker exec -it DOCKER-CONTAINER-V1 ping-c 4 172.18.0.3
+docker exec -it DOCKER-CONTAINER-KAFKA ping -c 4 172.18.0.4
+
