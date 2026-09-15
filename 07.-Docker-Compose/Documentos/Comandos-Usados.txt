@@ -1,0 +1,11 @@
+Inicializar los contenedores en segundo plano
+docker compose up -d
+
+Revisar la creación de contenedores
+docker compose ps
+
+Detener los contenedores creados
+docker compose stop
+
+Inicializar los contendores detenidos
+docker compose start

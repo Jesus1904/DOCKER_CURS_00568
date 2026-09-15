@@ -1,0 +1,57 @@
+services:
+
+  db:
+    image: postgres:16
+    container_name: STACK-DB
+    environment:
+      - POSTGRES_USER=jezuz
+      - POSTGRES_PASSWORD=qwerty123
+      - POSTGRES_DB=examen_db
+    ports:
+      - "5432:5432"
+    networks:
+      - red-stack-c7
+
+  adminer:
+    image: adminer
+    container_name: STACK-ADMINER
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    networks:
+      - red-stack-c7
+
+  cache:
+    image: redis:7
+    container_name: STACK-REDIS
+    command: redis-server --requirepass qwerty123
+    ports:
+      - "6379:6379"
+    networks:
+      - red-stack-c7
+
+  # Para esta parte del ejercico usare mis 2 imagenes propias (componentes 4 y 5) que ya subi a Docker Hub, para no tener que crear un Dockerfile y construir la imagen desde cero.
+  todo-app:
+    image: jezuz1904/to-do-list-v1:1.0
+    container_name: STACK-TODO-APP
+    ports:
+      - "5000:5000"
+      - "5050:5000"
+    networks:
+      - red-stack-c7
+
+
+  notas-app:
+    image: jezuz1904/tarjeta-notas-v2:1.0
+    container_name: STACK-NOTAS-APP
+    ports:
+      - "3000:3000"
+    networks:
+      - red-stack-c7
+
+#Creamos la red para que los contenedores puedan comunicarse entre si, y no tener que exponer todos los puertos al host.
+#Al comienzo no entendia por que se crea la red al final pero el yml no se ejecuta de arriba hacia abajo, sino que primero crea la red y luego los contenedores, por eso no hay problema en crear la red al final del archivo.
+networks:
+  red-stack-c7:
+    driver: bridge
