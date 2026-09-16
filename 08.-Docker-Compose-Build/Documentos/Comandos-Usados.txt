@@ -1,0 +1,22 @@
+Inicializar los contenedores en segundo plano
+docker compose up -d
+
+Revisar la creación de contenedores
+docker compose ps
+
+Detener los contenedores creados
+docker compose stop
+
+Inicializar los contendores detenidos
+docker compose start
+
+Recrear contenedores
+docker compose up -d --force-recreate	
+
+
+Reconstruir la imagen
+docker compose build node
+
+Verificación de los puertos
+docker compose port node 3000
+docker compose port python 5000
