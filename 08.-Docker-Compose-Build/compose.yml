@@ -1,0 +1,14 @@
+services:
+  python:
+    build:
+      context: ./App-Python
+    ports:
+      - "5001:5000"
+
+
+  node:
+    build:
+      context: ./Node
+    ports:
+      - "3001:3000"  
+     

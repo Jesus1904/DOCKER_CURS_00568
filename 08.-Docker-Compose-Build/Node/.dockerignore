@@ -1,0 +1,26 @@
+# Control de versiones
+.git
+.gitignore
+
+
+node_modules/
+npm-debug.log
+
+
+.env
+*.env
+
+
+evidencias/
+README.md
+*.md
+
+
+.vscode/
+.idea/
+.DS_Store
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose*.yml
