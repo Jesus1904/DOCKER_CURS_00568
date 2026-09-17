@@ -1,0 +1,30 @@
+Validar la configuracion de Compose antes de levantar
+docker compose config
+
+Levantar el stack (crea red, volumen y contenedor)
+docker compose up -d
+
+Verificar el contenedor corriendo
+docker compose ps
+
+
+Verificar los datos insertados
+docker compose exec postgres psql -U docker -d laboratorio -c "SELECT * FROM estudiantes;"
+docker compose exec postgres psql -U docker -d laboratorio -c "SELECT count(*) FROM matriculas;"
+
+Confirmar que el volumen existe antes de la prueba de persistencia
+docker volume ls | grep postgres_data
+
+Eliminar el contenedor (sin tocar el volumen)
+docker compose down
+
+Confirmar que el contenedor ya no existe, pero el volumen si
+docker container ls -a | grep secrets-postgres
+docker volume ls | grep postgres_data
+
+Levantar un contenedor nuevo, reutilizando el mismo volumen
+docker compose up -d
+
+# Verificar que los datos persistieron
+docker compose exec postgres psql -U docker -d laboratorio -c "SELECT * FROM estudiantes;"
+docker compose exec postgres psql -U docker -d laboratorio -c "SELECT count(*) FROM matriculas;"
