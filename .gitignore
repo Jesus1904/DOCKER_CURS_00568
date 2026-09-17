@@ -1,0 +1,29 @@
+# Entornos y secretos
+.env
+*.env
+secrets/
+*.pem
+*.key
+
+# Dependencias por lenguaje (creo usare algo de python y node)
+node_modules/
+venv/
+__pycache__/
+vendor/
+target/
+bin/
+obj/
+
+# Docker
+*.log
+docker-compose.override.yml
+
+# Sistema/editores
+.DS_Store
+.vscode/
+.idea/
+Thumbs.db
+
+# Archivos temporales para evitar subirlos al repositorio
+*.tmp
+*.bak
