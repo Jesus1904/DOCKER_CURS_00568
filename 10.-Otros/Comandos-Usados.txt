@@ -1,0 +1,32 @@
+Docker system (limpieza y diagnostico)
+
+Ver espacio usado por Docker (imagenes, contenedores, volumenes, cache)
+docker system df
+
+Limpiar contenedores detenidos, redes sin uso, cache de build
+docker system prune
+
+Limpiar solo cache de builds antiguos
+docker builder prune
+
+Backup y restore de un volumen
+
+Backup: montamos el volumen en un contenedor temporal de Ubuntu y comprimimos su contenido a un .tar
+docker run --rm \
+-v 09-secrets-volumen_postgres_data:/data \
+-v $(pwd):/backup \
+ubuntu tar czf /backup/postgres_backup.tar.gz -C /data .
+
+Verificar que el archivo se genero
+ls -lh postgres_backup.tar.gz
+
+Restore: creamos un volumen nuevo y restauramos el backup ahi
+docker volume create postgres_data_restored
+
+docker run --rm \
+-v postgres_data_restored:/data \
+-v $(pwd):/backup \
+ubuntu tar xzf /backup/postgres_backup.tar.gz -C /data
+
+Verificar que el volumen restaurado tiene contenido
+docker run --rm -v postgres_data_restored:/data ubuntu ls -la /data
